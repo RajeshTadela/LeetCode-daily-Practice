@@ -12,21 +12,22 @@ class Solution {
 public:
     vector<int> nextLargerNodes(ListNode* head) {
         ListNode*curr=head;
-        int k=0;
-        vector<int> ans;
+        vector<int> nums;
+        stack<int> st;
         while(curr!=nullptr){
-            ListNode*temp=curr->next;
-            while(temp!=nullptr){
-                if(temp->val > curr->val){
-                    ans.push_back(temp->val);
-                    break;
-                }
-                else{
-                    temp=temp->next;
-                }
-            }
-            if(temp==nullptr) ans.push_back(0);
+            nums.push_back(curr->val);
             curr=curr->next;
+        }
+        int n=nums.size();
+        vector<int> ans(n,0);
+        for(int i=n-1;i>=0;i--){
+            while(!st.empty() && st.top()<=nums[i]){
+                st.pop();
+            }
+            if(!st.empty()){
+                ans[i]=st.top();
+            }
+            st.push(nums[i]);
         }
         return ans;
     }
