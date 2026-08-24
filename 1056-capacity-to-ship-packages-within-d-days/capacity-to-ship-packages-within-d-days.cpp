@@ -19,7 +19,7 @@ public:
                 s=weights[i];
             }
         }
-        return (i==n)?true: false;
+        return (i==n);
     }
     int shipWithinDays(vector<int>& weights, int days) {
         int n=weights.size();
